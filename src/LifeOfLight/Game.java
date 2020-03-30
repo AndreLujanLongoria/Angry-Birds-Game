@@ -80,6 +80,8 @@ public class Game implements Runnable {
         this.notEnded = notEnded;
     }
     
+    
+    
     private void init() {
          display = new Display(title, getWidth(), getHeight());  
          Assets.init();
@@ -88,9 +90,9 @@ public class Game implements Runnable {
          
          display.getJframe().addKeyListener(keyManager);
          display.getJframe().addMouseListener(mouseManager);
-         display.getJframe().addMouseMotionListener(mouseManager);
          display.getCanvas().addMouseListener(mouseManager);
          display.getCanvas().addMouseMotionListener(mouseManager);
+         display.getJframe().addMouseMotionListener(mouseManager);
                  
          Assets.backSound.setLooping(true);
          Assets.backSound.play();
@@ -122,6 +124,11 @@ public class Game implements Runnable {
     public KeyManager getKeyManager() {
         return keyManager;
     }
+
+    public MouseManager getMouseManager() {
+        return mouseManager;
+    }
+    
    
     public void beep() {
         Assets.gunShot.play();
@@ -150,6 +157,7 @@ public class Game implements Runnable {
         {
             g = bs.getDrawGraphics();
             g.drawImage(Assets.background, 0, 0, width, height, null);
+            g.drawImage(Assets.area, 0, 0, 200, height, null);
             
             g.setFont(new Font("TimesRoman", Font.PLAIN, 16));
             g.setColor(Color.red);
@@ -164,6 +172,7 @@ public class Game implements Runnable {
             //g.drawString(String.valueOf("2"), getWidth() -60, 45);
                  
             player.render(g);
+            
             target.render(g);
 
             if(this.getKeyManager().pause){
