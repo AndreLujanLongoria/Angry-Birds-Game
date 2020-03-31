@@ -20,11 +20,13 @@ public class Game implements Runnable {
     private Target target;
     private final KeyManager keyManager;
     private final MouseManager mouseManager;
+    private int countLifes = 1; 
 
     private int lifes;
     private int points;
     private boolean notEnded;
     private final ReadandWrite saveFile;
+    private int counterTouchedLimits;
 
     public Game(String title, int width, int height) {
         this.title = title;
@@ -34,9 +36,11 @@ public class Game implements Runnable {
         keyManager = new KeyManager();
         mouseManager = new MouseManager();
         saveFile = new ReadandWrite();
+        counterTouchedLimits = 0; 
         
         this.points = 0;
-        this.lifes = (int) (Math.random() * (7-5 +1)) + 5;
+        //this.lifes = (int) (Math.random() * (7-5 +1)) + 5;
+        this.lifes = 5;
         notEnded = true; 
     }
 
@@ -79,6 +83,15 @@ public class Game implements Runnable {
     public void setNotEnded(boolean notEnded) {
         this.notEnded = notEnded;
     }
+
+    public int getCounterTouchedLimits() {
+        return counterTouchedLimits;
+    }
+
+    public void setCounterTouchedLimits(int counterTouchedLimits) {
+        this.counterTouchedLimits = counterTouchedLimits;
+    }
+    
     
     
     
@@ -144,7 +157,27 @@ public class Game implements Runnable {
         
         if(this.getLifes() == 0){
             this.setRunning(false);
-        }  
+            render();
+        }
+        // Check Collision with enemy
+        if(player.isTouchedFloor()){
+            this.setCounterTouchedLimits(this.getCounterTouchedLimits() +1);
+            System.out.println("COUNTER");
+            System.out.println(this.getCounterTouchedLimits());
+            if(this.getCounterTouchedLimits() % 4 == 3){
+                this.setLifes(lifes-1);
+                System.out.println("ENTRE");
+                this.setCounterTouchedLimits(this.getCounterTouchedLimits() +1);
+               
+                
+            }
+             // Restart touched floor
+            player.setTouchedFloor(false);
+        }
+        
+        
+        
+        
     }
     
     private void render() {
@@ -156,6 +189,7 @@ public class Game implements Runnable {
         else
         {
             g = bs.getDrawGraphics();
+            
             g.drawImage(Assets.background, 0, 0, width, height, null);
             g.drawImage(Assets.area, 0, 0, 200, height, null);
             
@@ -174,6 +208,8 @@ public class Game implements Runnable {
             player.render(g);
             
             target.render(g);
+            
+            
 
             if(this.getKeyManager().pause){
                 g.drawImage(Assets.pause, getWidth()/2 -150, getHeight()/2 -150, 300, 300, null);
@@ -204,8 +240,11 @@ public class Game implements Runnable {
                 g.drawImage(Assets.gameOver, 0, 0, 800, 500, null);
                 Assets.backSound.stop();
             }
+            
             bs.show();
             g.dispose();
+            
+            
         }
     }
 

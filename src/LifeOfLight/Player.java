@@ -19,6 +19,8 @@ public class Player extends Item{
     private boolean startMovement;
     private double startingTime;
     
+    private boolean touchedFloor;
+    
     public Player(int x, int y, int direction, int width, int height, Game game) {
         super(x, y, width, height);
         this.direction = direction;
@@ -29,7 +31,8 @@ public class Player extends Item{
         this.yCoordinateStart = 0;
         this.xCoordinateEnd = 0;
         this.yCoordinateEnd = 0;
-        this.startMovement = false; 
+        this.startMovement = false;
+        this.touchedFloor = false; 
         
         this.player = new Animation(Assets.playerMove, 100);
     }
@@ -54,6 +57,15 @@ public class Player extends Item{
     public boolean isStartMovement() {
         return startMovement;
     }
+
+    public boolean isTouchedFloor() {
+        return touchedFloor;
+    }
+
+    public void setTouchedFloor(boolean touchedFloor) {
+        this.touchedFloor = touchedFloor;
+    }
+    
     
     
     @Override
@@ -102,7 +114,7 @@ public class Player extends Item{
             double xDifference = abs(this.xCoordinateEnd - this.xCoordinateStart);
             double yDifference = abs(this.yCoordinateEnd - this.yCoordinateStart);
             int yStartingPoint = this.yCoordinateEnd;
-            System.out.println("Start Movement");
+            
             // Set time
             //one pixel is one meter, velocity is m/s
             double time = (System.currentTimeMillis() - this.startingTime)*0.001;
@@ -139,7 +151,6 @@ public class Player extends Item{
             player.tick();
             
             
-            // In case of collission loss a life
             
             
         }
@@ -166,19 +177,31 @@ public class Player extends Item{
            keyboardDir = "right";
            this.player.tick();
         }
-        // reset x position and y position if colision
+        
+        
+        // reset x position and y position if colision and stop animation
         if (getX() + 60 >= game.getWidth()) {
-            setX(game.getWidth() - 60);
+            setX(0);
+            setY(game.getHeight()/2 - this.getHeight()/2);
+            this.startMovement = false;
+            this.setTouchedFloor(true);
         }
         else if (getX() <= -30) {
             setX(-30);
         }
         if (getY() + 80 >= game.getHeight()) {
-            setY(game.getHeight() - 80);
+            setX(0);
+            setY(game.getHeight()/2 - this.getHeight()/2);
+            this.startMovement = false;
+            this.setTouchedFloor(true);
         }
         else if (getY() <= -20) {
-            setY(-20);
+            setX(0);
+            setY(game.getHeight()/2 - this.getHeight()/2);
+            this.startMovement = false;
+            this.setTouchedFloor(true);
         }
+        
         if(game.getKeyManager().pause){
             this.setSpeed(0);
 
