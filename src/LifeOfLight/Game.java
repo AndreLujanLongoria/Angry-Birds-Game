@@ -27,6 +27,7 @@ public class Game implements Runnable {
     private boolean notEnded;
     private final ReadandWrite saveFile;
     private int counterTouchedLimits;
+    private int collisionTarget; 
 
     public Game(String title, int width, int height) {
         this.title = title;
@@ -36,7 +37,8 @@ public class Game implements Runnable {
         keyManager = new KeyManager();
         mouseManager = new MouseManager();
         saveFile = new ReadandWrite();
-        counterTouchedLimits = 0; 
+        counterTouchedLimits = 0;
+        collisionTarget = 0;
         
         this.points = 0;
         //this.lifes = (int) (Math.random() * (7-5 +1)) + 5;
@@ -146,6 +148,11 @@ public class Game implements Runnable {
     public void beep() {
         Assets.gunShot.play();
     }
+    
+    public void beepEncested() {
+        Assets.ahem.play();
+    }
+    
     public Player getPlayer() {
         return player;
     }
@@ -175,9 +182,14 @@ public class Game implements Runnable {
             player.setTouchedFloor(false);
         }
         
-        
-        
-        
+        if(player.collisionRight(target)){
+            this.beepEncested();
+            player.setX(0);
+            player.setY(this.getHeight()/2 - player.getHeight()/2);
+            player.setStartMovement(false);
+            this.setPoints(points + 10);
+            this.collisionTarget = this.collisionTarget + 1; 
+        }
     }
     
     private void render() {
@@ -209,7 +221,10 @@ public class Game implements Runnable {
             
             target.render(g);
             
-            
+            if(this.collisionTarget % 6 == 5){
+                this.setLifes(lifes +1);
+                this.collisionTarget = this.collisionTarget + 1; 
+            }
 
             if(this.getKeyManager().pause){
                 g.drawImage(Assets.pause, getWidth()/2 -150, getHeight()/2 -150, 300, 300, null);

@@ -58,6 +58,12 @@ public class Player extends Item{
         return startMovement;
     }
 
+    public void setStartMovement(boolean startMovement) {
+        this.startMovement = startMovement;
+    }
+    
+    
+
     public boolean isTouchedFloor() {
         return touchedFloor;
     }
@@ -185,6 +191,7 @@ public class Player extends Item{
             setY(game.getHeight()/2 - this.getHeight()/2);
             this.startMovement = false;
             this.setTouchedFloor(true);
+            game.beep();
         }
         else if (getX() <= -30) {
             setX(-30);
@@ -194,12 +201,14 @@ public class Player extends Item{
             setY(game.getHeight()/2 - this.getHeight()/2);
             this.startMovement = false;
             this.setTouchedFloor(true);
+            game.beep();
         }
         else if (getY() <= -20) {
             setX(0);
             setY(game.getHeight()/2 - this.getHeight()/2);
             this.startMovement = false;
             this.setTouchedFloor(true);
+            game.beep();
         }
         
         if(game.getKeyManager().pause){

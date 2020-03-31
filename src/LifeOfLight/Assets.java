@@ -14,6 +14,7 @@ public class Assets {
     public static BufferedImage pause;
     public static SoundClip backSound;
     public static SoundClip gunShot; 
+    public static SoundClip ahem; 
 
     public Assets() {
     }
@@ -22,6 +23,7 @@ public class Assets {
         background = ImageLoader.loadImage("/images/background.png");
         area = ImageLoader.loadImage("/images/square.png");
         backSound = new SoundClip("/sounds/danse.wav");
+        ahem = new SoundClip("/sounds/ahem.wav");
         gunShot = new SoundClip("/sounds/Gunshot.wav");
         gameOver = ImageLoader.loadImage("/images/gameOver.jpg");
         pause = ImageLoader.loadImage("/images/pause2.png");
