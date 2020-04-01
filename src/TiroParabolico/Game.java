@@ -96,7 +96,8 @@ public class Game implements Runnable {
     private void init() {
          display = new Display(title, getWidth(), getHeight());  
          Assets.init();
-         player = new Player(0, getHeight() - 100, 1, 100, 100, this);   
+         
+         player = new Player(100, getHeight()/2, 1, 100, 100, this);   
          target = new Target(getWidth() -200, getHeight() - 200, 1, 100, 100, this);
          
          display.getJframe().addKeyListener(keyManager);
@@ -157,9 +158,9 @@ public class Game implements Runnable {
         keyManager.tick();
         target.tick();
         
-        if(player.draggedCollision(player)){
+        //if(player.draggedCollision(player)){
             player.tick();
-        }
+        //}
         
         if(this.getLifes() == 0){
             this.setRunning(false);

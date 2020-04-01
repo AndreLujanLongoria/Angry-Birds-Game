@@ -25,18 +25,22 @@ public class MouseManager implements MouseListener, MouseMotionListener {
     
     @Override
     public void mouseClicked(MouseEvent e) {
+        
         izquierdo = true;
         releasedMouse = false;
         pressedMouse = false;
         x = e.getX();
         y = e.getY();
+    
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
+        izquierdo = true;
         pressedMouse = true;
         x = e.getX();
         y = e.getY();
+        
     }
 
     @Override
@@ -73,6 +77,15 @@ public class MouseManager implements MouseListener, MouseMotionListener {
         return y;
     }
 
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+    
+    
     public boolean isDerecho() {
         return derecho;
     }

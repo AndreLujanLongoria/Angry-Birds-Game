@@ -72,15 +72,16 @@ public abstract class Item {
         return bStatus;
     }
     
-    public boolean draggedCollision(Object o){
+    public boolean draggedCollision(int x, int y){
         boolean bStatus = false;
+        // Use contains cuando haces click en el mouse 
+        // para que puedas mover al personaje
         
-        if(o instanceof Item ){
             // Or use this
             Rectangle rThis = new Rectangle(getX(), getY(),getWidth(), getHeight());
-
-            bStatus = rThis.contains(mouse.getX(), mouse.getY());
-        }
+            
+            bStatus = rThis.contains(x, y);
+            
         
         return bStatus;
     }

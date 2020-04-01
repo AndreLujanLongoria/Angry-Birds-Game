@@ -72,12 +72,13 @@ public class Player extends Item{
     @Override
     public void tick() {
         
-        // Moving player with mouse 
+        // Moving player with mouse
+       if(this.draggedCollision(game.getMouseManager().getX(), game.getMouseManager().getY())){
         if(game.getMouseManager().isIzquierdo()){
-            setX(game.getMouseManager().getX());
-            setY(game.getMouseManager().getY());
+            setX(game.getMouseManager().getX() -50);
+            setY(game.getMouseManager().getY() - 50);
             game.getMouseManager().setIzquierdo(false);
-        }     
+        }
         
         // If mouse pressed store the starting point to get the difference
         // and get the speed
@@ -111,6 +112,7 @@ public class Player extends Item{
         // game.
         //System.out.println("Tick jugador");
         if(this.startMovement){
+            
             // Get the difference between starting point
             double xDifference = abs(this.xCoordinateEnd - this.xCoordinateStart);
             double yDifference = abs(this.yCoordinateEnd - this.yCoordinateStart);
@@ -150,11 +152,14 @@ public class Player extends Item{
             setX((int)(this.xCoordinateEnd + xDifference*time*Math.cos(45)));
             setY((int)(yStartingPoint + -1*xDifference*Math.sin(45)*time + 0.5*9.81*pow(time,2.0)));
             player.tick();
+            game.getMouseManager().setX(this.getX());
+            game.getMouseManager().setY(this.getY());
         }
+       }
         
         // reset x position and y position if colision and stop animation
         if (getX() + 60 >= game.getWidth()) {
-            setX(0);
+            setX(100);
             setY(game.getHeight()/2 - this.getHeight()/2);
             this.startMovement = false;
             this.setTouchedFloor(true);
@@ -164,14 +169,14 @@ public class Player extends Item{
             setX(-30);
         }
         if (getY() + 80 >= game.getHeight()) {
-            setX(0);
+            setX(100);
             setY(game.getHeight()/2 - this.getHeight()/2);
             this.startMovement = false;
             this.setTouchedFloor(true);
             game.beep();
         }
         else if (getY() <= -20) {
-            setX(0);
+            setX(100);
             setY(game.getHeight()/2 - this.getHeight()/2);
             this.startMovement = false;
             this.setTouchedFloor(true);
