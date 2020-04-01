@@ -158,9 +158,7 @@ public class Game implements Runnable {
         keyManager.tick();
         target.tick();
         
-        //if(player.draggedCollision(player)){
-            player.tick();
-        //}
+        player.tick();
         
         if(this.getLifes() == 0){
             this.setRunning(false);
