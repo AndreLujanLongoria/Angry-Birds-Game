@@ -1,4 +1,4 @@
-package LifeOfLight;
+package TiroParabolico;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -56,17 +56,6 @@ public abstract class Item {
     public abstract void tick(); //Son abstractos no tienen codigo
 
     public abstract void render(Graphics g);
-    
-    public boolean collision (Object o){ //Ally
-        boolean bStatus = false;  
-        if(o instanceof Item ){
-            Rectangle rThis = new Rectangle(getX()-10, getY(),getWidth()*2, getHeight()-90);  //x y width height
-            Item i = (Item)o;
-            Rectangle rOther = new Rectangle(i.getX()+50, i.getY()+100,1, 1);
-            bStatus = rThis.intersects(rOther);
-        }
-        return bStatus;
-    }
     
     public boolean collisionRight(Object o){ //Enemy
         boolean bStatus = false; // assuming a collision 

@@ -1,10 +1,9 @@
-package LifeOfLight;
+package TiroParabolico;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.util.LinkedList;
 
 public class Game implements Runnable {
     private BufferStrategy bs;   
@@ -20,7 +19,7 @@ public class Game implements Runnable {
     private Target target;
     private final KeyManager keyManager;
     private final MouseManager mouseManager;
-    private int countLifes = 1; 
+    private final int countLifes = 1; 
 
     private int lifes;
     private int points;
@@ -93,10 +92,7 @@ public class Game implements Runnable {
     public void setCounterTouchedLimits(int counterTouchedLimits) {
         this.counterTouchedLimits = counterTouchedLimits;
     }
-    
-    
-    
-    
+
     private void init() {
          display = new Display(title, getWidth(), getHeight());  
          Assets.init();
@@ -136,6 +132,7 @@ public class Game implements Runnable {
         }
         stop();
     }
+    
     public KeyManager getKeyManager() {
         return keyManager;
     }
@@ -144,7 +141,6 @@ public class Game implements Runnable {
         return mouseManager;
     }
     
-   
     public void beep() {
         Assets.gunShot.play();
     }

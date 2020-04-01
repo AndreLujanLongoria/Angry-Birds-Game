@@ -1,5 +1,5 @@
 
-package LifeOfLight;
+package TiroParabolico;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.sound.sampled.LineUnavailableException;

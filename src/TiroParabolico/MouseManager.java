@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package LifeOfLight;
+package TiroParabolico;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -48,24 +48,21 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        
     }
 
     @Override
-    public void mouseDragged(MouseEvent me) {
+    public void mouseDragged(MouseEvent me) { 
         izquierdo = true;
         x = me.getX();
         y = me.getY();
     }
 
     @Override
-    public void mouseMoved(MouseEvent me) {
-        
+    public void mouseMoved(MouseEvent me) { 
     }
     //Metodos de get y set de variables
     public int getX() {
@@ -107,7 +104,5 @@ public class MouseManager implements MouseListener, MouseMotionListener {
     public void setPressedMouse(boolean pressedMouse) {
         this.pressedMouse = pressedMouse;
     }
-    
-    
-    
+  
 }

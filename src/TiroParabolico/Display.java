@@ -1,4 +1,4 @@
-package LifeOfLight;
+package TiroParabolico;
 
 import java.awt.Canvas; 
 import java.awt.Dimension;

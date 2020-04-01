@@ -1,4 +1,4 @@
-package LifeOfLight;
+package TiroParabolico;
 
 import java.awt.Graphics;
 import static java.lang.Math.abs;
@@ -9,7 +9,6 @@ public class Player extends Item{
     private int direction;
     private final Game game;
     private final Animation player;
-    private String keyboardDir;
     private int speed;
     
     private int xCoordinateStart;
@@ -33,7 +32,7 @@ public class Player extends Item{
         this.yCoordinateEnd = 0;
         this.startMovement = false;
         this.touchedFloor = false; 
-        
+
         this.player = new Animation(Assets.playerMove, 100);
     }
 
@@ -61,8 +60,6 @@ public class Player extends Item{
     public void setStartMovement(boolean startMovement) {
         this.startMovement = startMovement;
     }
-    
-    
 
     public boolean isTouchedFloor() {
         return touchedFloor;
@@ -71,9 +68,7 @@ public class Player extends Item{
     public void setTouchedFloor(boolean touchedFloor) {
         this.touchedFloor = touchedFloor;
     }
-    
-    
-    
+
     @Override
     public void tick() {
         
@@ -82,8 +77,7 @@ public class Player extends Item{
             setX(game.getMouseManager().getX());
             setY(game.getMouseManager().getY());
             game.getMouseManager().setIzquierdo(false);
-        }
-        
+        }     
         
         // If mouse pressed store the starting point to get the difference
         // and get the speed
@@ -103,6 +97,7 @@ public class Player extends Item{
             game.getMouseManager().setReleasedMouse(false);
             // Set X and Y according to movement
             this.xCoordinateEnd = game.getMouseManager().getX();
+            System.out.println(this.xCoordinateEnd);
             if(this.xCoordinateEnd < 0){
                 this.xCoordinateEnd = 0;
             }
@@ -155,35 +150,7 @@ public class Player extends Item{
             setX((int)(this.xCoordinateEnd + xDifference*time*Math.cos(45)));
             setY((int)(yStartingPoint + -1*xDifference*Math.sin(45)*time + 0.5*9.81*pow(time,2.0)));
             player.tick();
-            
-            
-            
-            
         }
-        
-        
-        
-        // moving player depending on flags
-        if (game.getKeyManager().up) {
-           setY(getY() - speed);
-           keyboardDir = "up"; 
-        }
-        if (game.getKeyManager().down) {
-           setY(getY() + speed);
-           keyboardDir = "down";
-        }
-        if (game.getKeyManager().left) {
-           setX(getX() - speed); 
-           keyboardDir = "left";
-           player.tick();
-        }
-        if (game.getKeyManager().right) {
-           setX(getX() + speed);
-           //game.beep();
-           keyboardDir = "right";
-           this.player.tick();
-        }
-        
         
         // reset x position and y position if colision and stop animation
         if (getX() + 60 >= game.getWidth()) {
@@ -213,11 +180,7 @@ public class Player extends Item{
         
         if(game.getKeyManager().pause){
             this.setSpeed(0);
-
-        }else if(!game.getKeyManager().pause){
-            this.setSpeed(3);
         }
-        
     }
 
     @Override
