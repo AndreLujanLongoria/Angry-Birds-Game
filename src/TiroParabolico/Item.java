@@ -8,6 +8,7 @@ public abstract class Item {
     protected int y;        
     protected int width;
     protected int height;
+    MouseManager mouse;
 
     public Item(int x, int y, int width, int height) {
         this.x = x;
@@ -57,7 +58,7 @@ public abstract class Item {
 
     public abstract void render(Graphics g);
     
-    public boolean collisionRight(Object o){ //Enemy
+    public boolean collisionRight(Object o){
         boolean bStatus = false; // assuming a collision 
         if(o instanceof Item ){
             // Or use this
@@ -69,9 +70,19 @@ public abstract class Item {
             bStatus = rThis.intersects(rOther);
         }
         return bStatus;
-        
     }
     
-    
+    public boolean draggedCollision(Object o){
+        boolean bStatus = false;
+        
+        if(o instanceof Item ){
+            // Or use this
+            Rectangle rThis = new Rectangle(getX(), getY(),getWidth(), getHeight());
+
+            bStatus = rThis.contains(mouse.getX(), mouse.getY());
+        }
+        
+        return bStatus;
+    }
 
 }

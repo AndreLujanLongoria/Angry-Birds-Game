@@ -20,8 +20,8 @@ public class MouseManager implements MouseListener, MouseMotionListener {
     private boolean derecho;
     private boolean releasedMouse;
     private boolean pressedMouse;
-    private int x;
-    private int y;
+    private int x = 0;
+    private int y = 0;
     
     @Override
     public void mouseClicked(MouseEvent e) {
