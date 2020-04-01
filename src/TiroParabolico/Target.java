@@ -8,7 +8,15 @@ public class Target extends Item{
     private final Animation bird;
     
     private int speed;
-    
+    /**
+     * 
+     * @param x
+     * @param y
+     * @param direction
+     * @param width
+     * @param height
+     * @param game 
+     */
     public Target(int x, int y, int direction, int width, int height, Game game){
         super(x,y, width, height);
         this.direction = direction;
@@ -18,19 +26,31 @@ public class Target extends Item{
         
         this.bird = new Animation(Assets.birdMove, 100);
     }
-    
+    /**
+     * 
+     * @return 
+     */
     public int getDirection() {
         return direction;
     }
-
+    /**
+     * 
+     * @param direction 
+     */
     public void setDirection(int direction) {
         this.direction = direction;
     }
-
+    /**
+     * 
+     * @return 
+     */
     public int getSpeed() {
         return speed;
     }
-
+    /**
+     * 
+     * @param speed 
+     */
     public void setSpeed(int speed) {
         this.speed = speed;
     }
@@ -43,13 +63,9 @@ public class Target extends Item{
         //Pausar el juego
         if(game.getKeyManager().pause){
             this.setSpeed(0);
-            //Assets.backSound.stop();
-            //this.enemySelected = false;
             
         }else if(!game.getKeyManager().pause){
             this.setSpeed(3);
-            //Assets.backSound.play();
-            //this.enemySelected = true;
         }
     }
     

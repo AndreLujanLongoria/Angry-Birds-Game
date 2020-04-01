@@ -36,7 +36,7 @@ public final class Display {
         jframe.pack();
         
     }
-
+    
     public JFrame getJframe() {
         return jframe;
     }

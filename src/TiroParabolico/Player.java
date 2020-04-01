@@ -71,16 +71,16 @@ public class Player extends Item {
     @Override
     public void tick() {
 
-        // Moving player with mouse when click inside player
-        // es porque no se mueve 
+        // Moving player with mouse when click inside player 
         if (this.draggedCollision(game.getMouseManager().getX(), game.getMouseManager().getY()) && !this.startMovement) {
-
+            
             if (game.getMouseManager().isIzquierdo()) {
                 setX(game.getMouseManager().getX() - 50);
                 setY(game.getMouseManager().getY() - 50);
 
                 game.getMouseManager().setIzquierdo(false);
             }
+            
 
             // If mouse pressed store the starting point to get the difference
             // and get the speed
@@ -108,13 +108,10 @@ public class Player extends Item {
                 this.yCoordinateEnd = game.getMouseManager().getY();
                 this.startingTime = System.currentTimeMillis();
                 //Start Movement
-                this.startMovement = true;
+                
                 game.getMouseManager().setReleasedMouse(false);
+                this.startMovement = true;
             }
-
-            // Place other method to render one by one until collided
-            // game.
-            //System.out.println("Tick jugador");
         }
 
         if (this.startMovement) {
@@ -128,35 +125,14 @@ public class Player extends Item {
             //one pixel is one meter, velocity is m/s
             double time = (System.currentTimeMillis() - this.startingTime) * 0.001;
 
-            // FOR ANY ANGLE
-            /*
-            // Change X position x = velocityx * time
-            setX((int)(this.xCoordinateEnd + xDifference*time));
-            System.out.println(this.x);
-          
-            // Change Y position y = velocityY *time - .5 * gravity * time^2
-            // Remember the movement in Y is positive going down
-            setY((int)(yStartingPoint + -1*yDifference*time + 0.5*9.81*pow(time,2.0)));
-            System.out.println("Y");
-            System.out.println(this.y);
             
-            player.tick();
-            
-             */
-            // In Case of collision
-            /*
-            if (getX() + 60 >= game.getWidth()) {
-                // reset to starting point 
-                setX(0);
-                this.startMovement = false;
-            }
-             */
             //For an angle of 45 we use
             setX((int) (this.xCoordinateEnd + xDifference * time * Math.cos(45)));
             setY((int) (yStartingPoint + -1 * xDifference * Math.sin(45) * time + 0.5 * 9.81 * pow(time, 2.0)));
             player.tick();
             game.getMouseManager().setX(this.getX());
             game.getMouseManager().setY(this.getY());
+            game.getMouseManager().setReleasedMouse(false);
         }
 
         // reset x position and y position if colision and stop animation

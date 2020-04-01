@@ -44,23 +44,38 @@ public class Game implements Runnable {
         this.lifes = 5;
         notEnded = true; 
     }
-
+    /**
+     * 
+     * @return 
+     */
     public int getWidth() {
         return width;
     }
-
+    /**
+     * 
+     * @return 
+     */
     public int getHeight() {
         return height;
     }
-
+    /**
+     * 
+     * @return 
+     */
     public int getLifes() {
         return lifes;
     }
-
+    /**
+     * 
+     * @return 
+     */
     public int getPoints() {
         return points;
     }
-
+    /**
+     * 
+     * @param lifes 
+     */
     public void setLifes(int lifes) {
         this.lifes = lifes;
     }
@@ -68,11 +83,17 @@ public class Game implements Runnable {
     public void setPoints(int points) {
         this.points = points;
     }
-
+    /**
+     * 
+     * @return 
+     */
     public boolean isRunning() {
         return running;
     }
-
+    /**
+     * 
+     * @param running 
+     */
     public void setRunning(boolean running) {
         this.running = running;
     }
@@ -80,19 +101,28 @@ public class Game implements Runnable {
     public boolean isNotEnded() {
         return notEnded;
     }
-
+    /**
+     * 
+     * @param notEnded 
+     */
     public void setNotEnded(boolean notEnded) {
         this.notEnded = notEnded;
     }
-
+    /**
+     * 
+     * @return 
+     */
     public int getCounterTouchedLimits() {
         return counterTouchedLimits;
     }
-
+    /**
+     * 
+     * @param counterTouchedLimits 
+     */
     public void setCounterTouchedLimits(int counterTouchedLimits) {
         this.counterTouchedLimits = counterTouchedLimits;
     }
-
+    
     private void init() {
          display = new Display(title, getWidth(), getHeight());  
          Assets.init();
@@ -133,11 +163,17 @@ public class Game implements Runnable {
         }
         stop();
     }
-    
+    /**
+     * 
+     * @return 
+     */
     public KeyManager getKeyManager() {
         return keyManager;
     }
-
+    /**
+     * 
+     * @return 
+     */
     public MouseManager getMouseManager() {
         return mouseManager;
     }
@@ -148,8 +184,11 @@ public class Game implements Runnable {
     
     public void beepEncested() {
         Assets.ahem.play();
-    }
-    
+    }   
+    /**
+     * 
+     * @return 
+     */
     public Player getPlayer() {
         return player;
     }
