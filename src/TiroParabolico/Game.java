@@ -184,7 +184,7 @@ public class Game implements Runnable {
         
         if(player.collisionRight(target)){
             this.beepEncested();
-            player.setX(0);
+            player.setX(100);
             player.setY(this.getHeight()/2 - player.getHeight()/2);
             player.setStartMovement(false);
             this.setPoints(points + 10);

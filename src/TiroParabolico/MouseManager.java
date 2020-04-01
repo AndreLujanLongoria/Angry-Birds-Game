@@ -45,6 +45,7 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        izquierdo = true;
         releasedMouse = true;
         x = e.getX();
         y = e.getY();
